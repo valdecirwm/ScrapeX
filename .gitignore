@@ -1,2 +1,3 @@
 node_modules/
-RESUMO.txt
+docs/
+.env

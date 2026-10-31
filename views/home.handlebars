@@ -1,0 +1,369 @@
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Sistema de Scraping Dinâmico</div>
+    <h1>Web Scraping<br><em>sem limites</em></h1>
+    <p>API poderosa para extração de dados da web. Rotação de proxies, seletores CSS, scraping em massa e muito mais.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num"><span id="req-count">0</span></div><div class="stat-label">Requests feitos</div></div>
+      <div class="stat"><div class="stat-num"><span>{{userAgentCount}}</span> agentes</div><div class="stat-label">User-Agents rotativos</div></div>
+      <div class="stat"><div class="stat-num"><span>4</span> endpoints</div><div class="stat-label">API REST completa</div></div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon green">🔄</div>
+      <div class="feature-name">Rotação de UA</div>
+      <div class="feature-desc">User-Agents rotativos automáticos para evitar bloqueios</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon blue">🎯</div>
+      <div class="feature-name">Extração CSS</div>
+      <div class="feature-desc">Selecione elementos exatos com seletores CSS customizados</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon purple">⚡</div>
+      <div class="feature-name">Bulk Scraping</div>
+      <div class="feature-desc">Scrape até 20 URLs em paralelo em uma só requisição</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon green">🔗</div>
+      <div class="feature-name">Link Extractor</div>
+      <div class="feature-desc">Extrai automaticamente todos os links e imagens da página</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon blue">🍪</div>
+      <div class="feature-name">Cookies & Headers</div>
+      <div class="feature-desc">Suporte completo a cookies e headers customizados</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon purple">📊</div>
+      <div class="feature-name">Meta Inspector</div>
+      <div class="feature-desc">Analisa meta tags, Open Graph, Twitter Cards e mais</div>
+    </div>
+  </div>
+
+  <!-- PLAYGROUND -->
+  <div class="section" id="playground">
+    <div class="section-header">
+      <div>
+        <div class="section-title">🧪 Playground</div>
+        <div class="section-sub">Teste a API diretamente no browser</div>
+      </div>
+    </div>
+
+    <div class="panel-grid">
+      <!-- LEFT: Request Builder -->
+      <div class="panel">
+        <div class="panel-title"><span class="panel-title-dot"></span> Configuração da Request</div>
+
+        <div class="tabs" role="tablist">
+          <button class="tab active" onclick="switchTab('basic', this)">Básico</button>
+          <button class="tab" onclick="switchTab('headers', this)">Headers</button>
+          <button class="tab" onclick="switchTab('options', this)">Opções</button>
+        </div>
+
+        <!-- BASIC TAB -->
+        <div class="tab-content active" id="tab-basic">
+          <div class="field">
+            <label>URL alvo</label>
+            <input type="url" id="target-url" placeholder="https://example.com" value="https://httpbin.org/get">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Timeout (ms)</label>
+              <input type="number" id="timeout" value="15000" min="1000" max="60000">
+            </div>
+            <div class="field">
+              <label>Wait antes (ms)</label>
+              <input type="number" id="wait" value="0" min="0" max="10000">
+            </div>
+          </div>
+          <div class="field">
+            <label>User-Agent customizado (opcional)</label>
+            <input type="text" id="custom-ua" placeholder="Deixe vazio para rotação automática">
+          </div>
+          <div class="field">
+            <label>Cookies (formato: key=val; key2=val2)</label>
+            <input type="text" id="cookies" placeholder="session=abc123; token=xyz">
+          </div>
+        </div>
+
+        <!-- HEADERS TAB -->
+        <div class="tab-content" id="tab-headers">
+          <div class="field">
+            <label>Headers customizados (JSON)</label>
+            <textarea id="custom-headers" placeholder='{"Authorization": "Bearer token", "X-Custom": "value"}'></textarea>
+          </div>
+          <div class="field">
+            <label>Retornar HTML completo</label>
+            <div class="toggle-group">
+              <label class="toggle-item">
+                <div>
+                  <div class="toggle-label">Page Source</div>
+                  <div class="toggle-desc">Retorna o HTML bruto da página</div>
+                </div>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="page-source">
+                  <span class="slider"></span>
+                </div>
+              </label>
+              <label class="toggle-item">
+                <div>
+                  <div class="toggle-label">JSON Response</div>
+                  <div class="toggle-desc">Tenta parsear a resposta como JSON</div>
+                </div>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="json-resp">
+                  <span class="slider"></span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTIONS TAB -->
+        <div class="tab-content" id="tab-options">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div>
+                <div class="toggle-label">🤖 Render JS</div>
+                <div class="toggle-desc">Emula navegador com JavaScript (simulado)</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="render-js">
+                <span class="slider"></span>
+              </div>
+            </label>
+            <label class="toggle-item">
+              <div>
+                <div class="toggle-label">🛡 Premium Proxy</div>
+                <div class="toggle-desc">Usa proxy residencial rotativo</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="premium-proxy">
+                <span class="slider"></span>
+              </div>
+            </label>
+            <label class="toggle-item">
+              <div>
+                <div class="toggle-label">🚫 Block Ads</div>
+                <div class="toggle-desc">Bloqueia scripts de rastreamento e ads</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" id="block-ads">
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" id="scrape-btn" onclick="runScrape()">
+            <span id="scrape-icon">🕷</span>
+            <span id="scrape-text">Executar Scraping</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Generated Code -->
+      <div class="panel">
+        <div class="panel-title"><span class="panel-title-dot"></span> Código Gerado</div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchCodeTab('curl', this)">cURL</button>
+          <button class="tab" onclick="switchCodeTab('js', this)">JavaScript</button>
+          <button class="tab" onclick="switchCodeTab('python', this)">Python</button>
+        </div>
+
+        <div id="code-curl" class="code-tab-content active">
+          <div class="code-block" id="curl-code">
+            <button class="code-btn" onclick="copyCode('curl-code')">Copiar</button>
+            <code id="curl-text"></code>
+          </div>
+        </div>
+        <div id="code-js" class="code-tab-content" style="display:none;">
+          <div class="code-block" id="js-code">
+            <button class="code-btn" onclick="copyCode('js-code')">Copiar</button>
+            <code id="js-text"></code>
+          </div>
+        </div>
+        <div id="code-python" class="code-tab-content" style="display:none;">
+          <div class="code-block" id="python-code">
+            <button class="code-btn" onclick="copyCode('python-code')">Copiar</button>
+            <code id="python-text"></code>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <div class="panel-title"><span class="panel-title-dot" style="background:var(--accent2)"></span> URL da API</div>
+          <div class="code-block" style="word-break:break-all;">
+            <button class="code-btn" onclick="copyApiUrl()">Copiar</button>
+            <code id="api-url-display" style="color:var(--accent); font-size:11px;"></code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div class="result-panel" id="result-panel">
+      <div class="result-header">
+        <div class="result-status">
+          <span class="status-dot" id="res-dot"></span>
+          <span id="res-status">—</span>
+        </div>
+        <div class="result-meta">
+          <span class="meta-chip" id="res-time">—</span>
+          <span class="meta-chip" id="res-size">—</span>
+          <span class="meta-chip" id="res-code">—</span>
+        </div>
+      </div>
+      <div class="result-tabs">
+        <button class="result-tab active" onclick="switchResultTab('overview', this)">Visão Geral</button>
+        <button class="result-tab" onclick="switchResultTab('links', this)">Links</button>
+        <button class="result-tab" onclick="switchResultTab('images', this)">Imagens</button>
+        <button class="result-tab" onclick="switchResultTab('meta', this)">Meta Tags</button>
+        <button class="result-tab" onclick="switchResultTab('raw', this)">Raw JSON</button>
+      </div>
+      <div class="result-body">
+        <div id="rt-overview"></div>
+        <div id="rt-links" style="display:none;"></div>
+        <div id="rt-images" style="display:none;"></div>
+        <div id="rt-meta" style="display:none;"></div>
+        <div id="rt-raw" style="display:none;"><pre id="raw-json"></pre></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRACT -->
+  <div class="section" id="extract">
+    <div class="section-header">
+      <div>
+        <div class="section-title">🎯 Data Extractor</div>
+        <div class="section-sub">Extraia dados com seletores CSS precisos</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span class="panel-title-dot" style="background:var(--accent2)"></span> Configurar Extração</div>
+
+      <div class="field">
+        <label>URL alvo</label>
+        <input type="url" id="extract-url" placeholder="https://quotes.toscrape.com" value="https://quotes.toscrape.com">
+      </div>
+
+      <div class="field">
+        <label>Seletores CSS</label>
+        <div class="job-list" id="selector-list"></div>
+        <button class="btn btn-secondary" style="margin-top:8px; font-size:12px;" onclick="addSelector()">+ Adicionar Seletor</button>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-top:1rem;">
+        <button class="btn btn-primary" onclick="runExtract()" style="flex:1;">
+          🎯 Extrair Dados
+        </button>
+        <button class="btn btn-secondary" onclick="loadExample()" style="white-space:nowrap;">
+          Carregar Exemplo
+        </button>
+      </div>
+
+      <div id="extract-result" style="margin-top:1.5rem; display:none;">
+        <div class="panel-title"><span class="panel-title-dot" style="background:var(--success)"></span> Resultado da Extração</div>
+        <pre id="extract-json" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; font-family:var(--mono); font-size:12px; overflow:auto; max-height:400px; white-space:pre-wrap;"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULK -->
+  <div class="section" id="bulk">
+    <div class="section-header">
+      <div>
+        <div class="section-title">⚡ Bulk Scraper</div>
+        <div class="section-sub">Scrape múltiplas URLs em paralelo</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title"><span class="panel-title-dot" style="background:var(--accent3)"></span> URLs (máx. 20)</div>
+
+      <div class="job-list" id="bulk-list"></div>
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <button class="btn btn-secondary" onclick="addBulkJob()" style="font-size:12px;">+ URL</button>
+        <button class="btn btn-secondary" onclick="clearBulkJobs()" style="font-size:12px;">🗑 Limpar</button>
+      </div>
+
+      <button class="btn btn-primary" style="margin-top:1rem;" onclick="runBulk()">
+        ⚡ Executar Bulk Scraping
+      </button>
+
+      <div id="bulk-result" style="margin-top:1.5rem; display:none;">
+        <div class="panel-title" style="margin-bottom:0.75rem;">
+          <span class="panel-title-dot" style="background:var(--success)"></span>
+          Resultados — <span id="bulk-summary"></span>
+        </div>
+        <div id="bulk-rows"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCS -->
+  <div class="section" id="docs">
+    <div class="section-header">
+      <div>
+        <div class="section-title">📚 Documentação da API</div>
+        <div class="section-sub">Endpoints disponíveis</div>
+      </div>
+    </div>
+
+    <div class="panel-grid" style="grid-template-columns:1fr; gap:1rem;">
+
+      <div class="panel" style="border-left:3px solid var(--accent);">
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+          <span style="background:rgba(0,229,160,0.15); color:var(--accent); font-family:var(--mono); font-size:12px; padding:3px 10px; border-radius:6px; font-weight:700;">GET</span>
+          <code style="font-family:var(--mono); font-size:13px;">/api/scrape</code>
+        </div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">Scraping básico via query string. Retorna HTML, links, imagens e meta tags.</p>
+        <div style="font-size:12px; color:var(--text3); font-family:var(--mono);">
+          ?url=https://... &amp;render_js=true &amp;timeout=15000 &amp;wait=1000 &amp;return_page_source=false
+        </div>
+      </div>
+
+      <div class="panel" style="border-left:3px solid var(--accent2);">
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+          <span style="background:rgba(0,191,255,0.15); color:var(--accent2); font-family:var(--mono); font-size:12px; padding:3px 10px; border-radius:6px; font-weight:700;">POST</span>
+          <code style="font-family:var(--mono); font-size:13px;">/api/scrape</code>
+        </div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">Scraping avançado via JSON body. Suporta headers customizados, cookies e extract_rules.</p>
+        <div class="code-block" style="font-size:11px;">
+{ "url": "...", "extract_rules": { "prices": ".price", "titles": { "selector": "h1", "type": "text" } }, "custom_headers": {}, "cookies": "..." }
+        </div>
+      </div>
+
+      <div class="panel" style="border-left:3px solid var(--accent3);">
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+          <span style="background:rgba(124,106,255,0.15); color:var(--accent3); font-family:var(--mono); font-size:12px; padding:3px 10px; border-radius:6px; font-weight:700;">POST</span>
+          <code style="font-family:var(--mono); font-size:13px;">/api/bulk</code>
+        </div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">Scraping em massa de até 20 URLs em paralelo. Retorna resultados com status individual.</p>
+        <div class="code-block" style="font-size:11px;">
+{ "jobs": [ { "url": "https://a.com" }, { "url": "https://b.com", "extract_rules": {...} } ] }
+        </div>
+      </div>
+
+      <div class="panel" style="border-left:3px solid var(--warning);">
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+          <span style="background:rgba(255,179,71,0.15); color:var(--warning); font-family:var(--mono); font-size:12px; padding:3px 10px; border-radius:6px; font-weight:700;">POST</span>
+          <code style="font-family:var(--mono); font-size:13px;">/api/extract</code>
+        </div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">Extração focada de dados com seletores CSS. Ideal para scraping estruturado.</p>
+        <div class="code-block" style="font-size:11px;">
+{ "url": "...", "selectors": { "quotes": ".quote .text", "authors": { "selector": ".author", "type": "text" } } }
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
